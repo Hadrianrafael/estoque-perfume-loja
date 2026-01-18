@@ -1,15 +1,24 @@
 import axios from "axios";
 
-// Vite usa import.meta.env para variáveis de ambiente
-const BACKEND_URL =
-  import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+// URL base do backend:
+// Em produção vem do VITE_API_URL
+// Em desenvolvimento usa localhost
+const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
+// Prefixo da API do backend
 const API_BASE_URL = `${BACKEND_URL}/api`;
 
 // Instância global do Axios
 const api = axios.create({
   baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
+
+// =========================
+// ROTAS DE PRODUTOS
+// =========================
 
 // Buscar produtos
 export const fetchProducts = async (params = {}) => {
@@ -34,17 +43,24 @@ export const deleteProduct = async (id) => {
   await api.delete(`/products/${id}`);
 };
 
-// Alertas de estoque baixo
+// =========================
+// ALERTAS
+// =========================
+
 export const fetchLowStockAlerts = async () => {
   const response = await api.get("/alerts/low-stock");
   return response.data;
 };
 
-// Resumo do dashboard
+// =========================
+// DASHBOARD
+// =========================
+
 export const fetchDashboardSummary = async () => {
   const response = await api.get("/dashboard/summary");
   return response.data;
 };
 
+// Export principal para requests genéricos
 export default api;
 
