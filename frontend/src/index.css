@@ -1,0 +1,14 @@
+:root {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #111827 0%, #020617 50%, #000 100%);
+  color: #f9fafb;
+}
+
+* {
+  box-sizing: border-box;
+}
